@@ -1,10 +1,13 @@
 const express = require('express');
+const multer = require('multer');
+
+
 const app = express();
 
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-  res.send('Hello !');
+  res.render('index');
 });
 
 app.listen(3000);
