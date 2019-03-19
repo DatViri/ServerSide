@@ -21,7 +21,7 @@
     <div id="upload" class="col s12">
         <div class="container">
             <h1>File Upload</h1>
-            <form action="/upload" method="post">
+            <form action="/upload" name="form" method="post" enctype="multipart/form-data">
                 <div class="row">
                     <div class="input-field col s12">
                         <input placeholder="Enter category" id="Category" type="text" class="validate">
@@ -38,8 +38,8 @@
 
                 <div class="row">
                     <div class="input-field col s12">
-                        <textarea id="description" class="materialize-textarea" data-length="120"></textarea>
-                        <label for="description">Description</label>
+                        <textarea id="Description" class="materialize-textarea" data-length="120"></textarea>
+                        <label for="Description">Description</label>
                     </div>
                 </div>
 
