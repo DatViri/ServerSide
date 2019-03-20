@@ -1,37 +1,41 @@
 const express = require('express');
-const multer = require('multer');
 const bodyParser = require('body-parser');
-const path = require('path');
+const mongoClient = require('mongodb');
+const multer = require('multer');
+
 
 const app = express();
+const upload = multer({dest: 'public/uploads'});
 
-app.use(express.static('./public'));
-app.use(bodyParser.urlencoded({extended: false}));
+let db;
+
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+mongoClient.connect('mongodb+srv://dattruong:7121997@image-view-q4pfx.mongodb.net/test?retryWrites=true'
+    , (err, client)=>{
+      if (err) return console.log(err);
+      db = client.db('image-view-info')
+      app.listen(port, () => {
+        console.log('Running on port ' + port);
+      });
+    });
 
-const storage = multer.diskStorage({
-  destination: './public/uploads/',
-  filename: (req, file, cb)=> {
-    cb(null, file.fieldname + '-' + Date.now() +
-    path.extname(file.originalname));
-  },
+const port = process.env.PORT || 8080;
+
+app.get('/api', (req, res) => {
+  res.sendfile(__dirname + '/public/index.html');
 });
 
-const upload = multer({
-  storage: storage,
-}).single('myImage');
-
-app.post('/upload', (req, res) => {
-  upload(req, res, (err) => {
-    if (err) {
-      console.log('wrong');
-    } else {
-      const body = req.body;
-      console.log(body);
-    }
+app.get('/api/info', (req, res) =>{
+  db.collection('info').find().toArray(function(err, results) {
+    res.send(results);
   });
 });
 
-
-app.listen(3000, ()=> console.log('Listening on port 3000'));
-
+app.post('/api/upload', (req, res) => {
+  db.collection('info').upload(req.body, (err, result) => {
+    if (err) return console.log(err);
+    console.log('saved to database');
+    res.redirect('/api');
+  });
+});

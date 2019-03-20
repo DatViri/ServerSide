@@ -2,74 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Homepage</title>
-    <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <title>MY APP</title>
 </head>
 <body>
+May Node and Express be with you.
 
+<form action="/api/upload" method="POST">
+    <input type="text" placeholder="category" name="category">
+    <input type="text" placeholder="title" name="title">
+    <input type="text" placeholder="description" name="description">
+    <input type="file" placeholder="file" name="file">
+    <button type="submit">Submit</button>
+</form>
 
-<div class="row">
-    <div class="col s12">
-        <ul class="tabs">
-            <li class="tab col s6"><a href="#index">View</a></li>
-            <li class="tab col s6"><a href="#upload">Add</a></li>
-        </ul>
-    </div>
-    <div id="index" class="col s12">View</div>
-
-    <div id="upload" class="col s12">
-        <div class="container">
-            <h1>File Upload</h1>
-            <form action="/upload" name="form" method="post" enctype="multipart/form-data">
-                <div class="row">
-                    <div class="input-field col s12">
-                        <input placeholder="Enter category" id="Category" type="text" class="validate">
-                        <label for="Category">Category</label>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="input-field col s12">
-                        <input placeholder="Enter title" id="Title" type="text" class="validate">
-                        <label for="Title">Title</label>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="input-field col s12">
-                        <textarea id="Description" class="materialize-textarea" data-length="120"></textarea>
-                        <label for="Description">Description</label>
-                    </div>
-                </div>
-
-                <div class="file-field input-field">
-                    <div class="btn grey">
-                        <span>File</span>
-                        <input name="myImage" type="file">
-                    </div>
-                    <div class="file-path-wrapper">
-                        <label>
-                            <input class="file-path validate" type="text">
-                        </label>
-                    </div>
-                </div>
-
-                <button type="submit" class="btn">Submit</button>
-            </form>
-        </div>
-    </div>
-</div>
-
-<script src="http://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script>
-  $(document).ready(function() {
-    $('.tabs').tabs();
-    $('input#input_text, textarea#textarea2').characterCounter();
-  });
-</script>
 </body>
 </html>
