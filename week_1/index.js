@@ -1,10 +1,24 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const router = require('./router');
+const mongoose = require('mongoose');
+require('dotenv').config();
+
+const url = process.env.DB_URL;
 const app = express();
 
-app.use(express.static('public'));
+// Middleware
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
-  res.send('Hello !');
+// Connect DB
+mongoose.connect(url).then(()=>{
+  console.log('Connected successfully.');
+  app.listen(3000);
+}, (err) => {
+  console.log('Connection to db failed: ' + err);
 });
 
-app.listen(3000);
+// API
+app.use('/api', router);
+
