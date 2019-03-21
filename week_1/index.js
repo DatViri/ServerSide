@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 // Connect DB
 mongoose.connect(url).then(()=>{
   console.log('Connected successfully.');
-  app.listen(3000);
+  app.listen(process.env.PORT);
 }, (err) => {
   console.log('Connection to db failed: ' + err);
 });
