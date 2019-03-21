@@ -2,8 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const router = require('./router');
 const mongoose = require('mongoose');
+require('dotenv').config();
 
-const url = 'mongodb+srv://dattruong:7121997@image-view-q4pfx.mongodb.net/datDB?retryWrites=true';
+const url = process.env.DB_URL;
 const app = express();
 
 // Middleware
